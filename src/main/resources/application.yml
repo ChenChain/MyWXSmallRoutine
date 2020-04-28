@@ -1,0 +1,18 @@
+server:
+  port: 8080
+#  ssl配置部分
+#  ssl:
+#    key-store: classpath:myssl.jks
+#    key-store-type: JKS
+#    key-alias: alias
+#    key-store-password: 4C7uC4Mm
+mybatis:
+  type-aliases-package: com.wx.wx_routine.entity
+  mapper-locations: classpath:mapper/*.xml
+
+spring:
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost/qsbAndroid?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&autoReconnect=true&allowMultiQueries=true

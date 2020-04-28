@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wx.wx_routine.dao.UserDao">
+
+    <!--    User saveUserByIdMap(Map<String, String> map);-->
+    <insert id="saveUserByIdMap">
+    insert into wx_user (user_openid) values (#{openid});
+    insert  into wx_user_login (user_openid,user_sessionkey) values (#{openid},#{session_key})
+</insert>
+
+    <!--    User findUserById(String openid);-->
+    <select id="findUserById" resultType="com.wx.wx_routine.entity.User">
+        select * from wx_user where user_openid=#{openid}
+    </select>
+
+    <!--    int updateUserByOpenId(User user);-->
+    <update id="updateUserByOpenId">
+        update wx_user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="user_nickname!=null">user_nickname =#{user_nickname},</if>
+            <if test="user_realname!=null">user_realname=#{user_realname},</if>
+            <if test="user_schoolid!=null">user_schoolid=#{user_schoolid},</if>
+            <if test="user_school!=null">user_school=#{user_school},</if>
+            <if test="user_college!=null">user_college=#{user_college},</if>
+            <if test="user_phonenumber!=null">user_phonenumber=#{user_phonenumber},</if>
+            <if test="user_address!=null">user_address=#{user_address},</if>
+            <if test="user_studentidcard_url!=null">user_studentidcard_url=#{user_studentidcard_url},</if>
+            <if test="user_studentcard_url!=null">user_studentcard_url=#{user_studentcard_url},</if>
+        </trim>
+        where user_openid =#{user_openid}
+    </update>
+</mapper>
