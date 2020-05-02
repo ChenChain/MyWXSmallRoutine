@@ -1,0 +1,22 @@
+server:
+  port: 443
+
+
+spring:
+  datasource:
+    username: root
+    password: cc123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.98.135.4/wx_database?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&autoReconnect=true&allowMultiQueries=true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+
+
+
+#本地图片保存路径
+imgPath: C:/Users/17596/Desktop/wx_imgs/
+
+#本地图片显示的url
+imgPathUrl: http://localhost:8080/wx_imgs/

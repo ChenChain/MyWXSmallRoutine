@@ -15,6 +15,9 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class WxRoutineApplication {
 
+
+
+
     public static void main(String[] args) {
         SpringApplication.run(WxRoutineApplication.class, args);
 
@@ -24,7 +27,7 @@ public class WxRoutineApplication {
      * http重定向到https
      * @return
      */
-//    @Bean
+    @Bean
     public TomcatServletWebServerFactory servletWebServerFactory(){
         TomcatServletWebServerFactory tomcat=new TomcatServletWebServerFactory(){
             @Override
@@ -41,12 +44,12 @@ public class WxRoutineApplication {
         return tomcat;
     }
 
-//    @Bean
+    @Bean
     public Connector httpConnector(){
         Connector connector=new Connector("org.apache.coyote.http11.Http11NioProtocol");
         connector.setScheme("http");
-        //Connector监听http的端口
-        connector.setPort(80);
+        //Connector监听http的端口--8082
+        connector.setPort(8082);
         connector.setSecure(false);
         //监听到http带你看后转向https
         connector.setRedirectPort(443);

@@ -17,7 +17,7 @@ import java.util.Map;
  *
  * @author 17596
  */
-@Api(value = "处理用户逻辑的路由")
+@Api(tags = "处理用户逻辑的路由")
 @RestController
 @Controller
 public class UserController {
@@ -38,6 +38,7 @@ public class UserController {
     public User getUserCode(@RequestParam(value = "code", required = true) String code,
                             @RequestParam(value = "appId", required = true) String appId,
                             @RequestParam(value = "screctId", required = true) String screctId) {
+
         Map map = userService.getUserOpenIdSessionKey(code, appId, screctId);
         User user = userService.findUserByIdMap(map);
         if (user != null) {
@@ -62,6 +63,13 @@ public class UserController {
         //更新后的user
         User u= (User) JSONObject.parseObject(jsonObject.toJSONString(),User.class);
         return  userService.updateUserByOpenId(u);
+    }
+
+
+    @ApiOperation(value = "测试路由", notes = "这是一个测试路由，如果你可以使用，则代表能够正常访问该服务下的所有接口"  )
+    @GetMapping("/api/test")
+    public String test(){
+        return "访问成功";
     }
 
 }

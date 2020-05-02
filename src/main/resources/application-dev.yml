@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+#本地图片保存路径
+imgPath: C:/Users/17596/Desktop/wx_imgs/
+
+#本地图片显示的url
+imgPathUrl: http://localhost:8080/wx_imgs/
+
+spring:
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost/qsbAndroid?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&autoReconnect=true&allowMultiQueries=true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
