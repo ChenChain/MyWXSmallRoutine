@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wx.wx_routine.dao.OrderDao">
+
+    <resultMap id="BaseOrderPublishedMap" type="com.wx.wx_routine.entity.OrderPublishedInfo">
+        <result property="infoId" column="info_id"></result>
+        <result property="infoText" column="info_text"></result>
+        <result property="infoStartTime" column="info_start_time"></result>
+        <result property="infoEndTime" column="info_end_time"></result>
+        <result property="infoPublishTime" column="info_publish_time"></result>
+        <result property="infoUserOpenId" column="info_user_openid"></result>
+        <result property="infoOfferMoney" column="info_offer_money"></result>
+        <result property="infoTitle" column="info_title"></result>
+        <result property="infoUserName" column="info_user_name"></result>
+        <result property="infoUserPhone" column="info_user_phone"></result>
+        <result property="infoUserAddress" column="info_user_address"></result>
+        <result property="infoExpressAddress" column="info_express_address"></result>
+        <result property="infoExpressId" column="info_express_id"></result>
+        <result property="infoExpressCompany" column="info_express_company"></result>
+        <result property="infoExpressAddressArea" column="info_express_address_area"></result>
+        <result property="infoUserRemark" column="info_user_remark"></result>
+    </resultMap>
+    <sql id="Base_OrderPublished_Column_List">
+        info_id,info_text,info_start_time,info_end_time,info_publish_time,info_user_openid,
+        info_offer_money,info_title,info_user_name,info_user_phone,info_user_address,
+        info_express_address,info_express_id,info_express_company,info_express_address_area,info_user_remark
+    </sql>
+
+    <sql id="Secret_OrderPublished_Column_List">
+        info_id,info_text,info_start_time,info_end_time,info_publish_time,
+        info_offer_money,info_title,info_user_name,info_user_address,
+        info_express_address,info_express_address_area,info_user_remark
+    </sql>
+
+    <!--    public int publishOrder(OrderPublishedInfo orderPublishedInfo);-->
+    <insert id="publishOrder">
+        insert into order_published_info (        info_id,info_text,info_start_time,info_end_time,info_publish_time,info_user_openid,
+        info_offer_money,info_title,info_user_name,info_user_phone,info_user_address,
+        info_express_address,info_express_id,info_express_company,info_express_address_area,info_user_remark)
+        values (#{infoId},#{infoText},#{infoStartTime},#{infoEndTime},#{infoPublishTime},#{infoUserOpenId},#{infoOfferMoney},#{infoTitle},#{infoUserName},
+        #{infoUserPhone},#{infoUserAddress},#{infoExpressAddress},#{infoExpressId},#{infoExpressCompany},#{infoExpressAddressArea},#{infoUserRemark})
+    </insert>
+
+    <!--    int updateOrder(OrderPublishedInfo orderPublishedInfo);-->
+    <update id="updateOrder" parameterType="com.wx.wx_routine.entity.OrderPublishedInfo">
+        update order_published_info
+        <set>
+            <if test="infoText!-null">
+                info_text=#{infoText},
+            </if>
+            <if test="infoStartTime!=null">
+                info_start_time=#{infoStartTime},
+            </if>
+            <if test="infoEndTime!=null">
+                info_end_time=#{infoEndTime},
+            </if>
+            <if test="infoPublishTime!=null">
+                info_publish_time=#{infoPublishTime},
+            </if>
+            <if test="infoOfferMoney">
+                info_offer_money=#{infoOfferMoney},
+            </if>
+            <if test="infoTitle">
+                info_title=#{infoTitle},
+            </if>
+            <if test="infoUserName">
+                info_user_name=#{infoUserName}
+            </if>
+            <if test="infoUserPhone">info_user_phone=#{infoUserPhone},</if>
+            <if test="infoUserAddress">info_user_address=#{infoUserAddress},</if>
+            <if test="infoExpressAddress">info_express_address=#{infoExpressAddress},</if>
+            <if test="infoExpressId">info_express_id=#{infoExpressId},</if>
+            <if test="infoExpressCompany">info_express_company=#{infoExpressCompany},</if>
+            <if test="infoExpressAddressArea">info_express_address_area=#{infoExpressAddressArea}</if>
+            <if test="infoUserRemark">info_user_remark=#{infoUserRemark}</if>
+        </set>
+        where info_id=#{infoId}
+    </update>
+
+    <!--    List<OrderPublishedInfo> getOrderPublishedListWithoutDetails(Integer pageNum, Integer pageSize);-->
+    <select id="getOrderPublishedListWithoutDetails" resultMap="BaseOrderPublishedMap">
+        select <include refid="Secret_OrderPublished_Column_List"></include> from order_published_info order by
+        info_end_time asc , info_start_time asc,info_publish_time desc
+    </select>
+
+    <!--    int delOrderPublishedOrder(String infoId);-->
+    <delete id="delOrderPublishedOrder">
+    delete  from order_published_info where  info_id =#{infoId}
+</delete>
+
+    <!--    Integer getOrderState(String infoId);-->
+    <select id="getOrderState" resultType="java.lang.Integer">
+    select  state from order_published_info where info_id =#{infoId}
+</select>
+
+    <!--    OrderPublishedInfo getOrderPublishedInfoWithDetails(int infoId);-->
+    <select id="getOrderPublishedInfoWithDetails" resultMap="BaseOrderPublishedMap">
+        select <include refid="Base_OrderPublished_Column_List"></include> from order_published_info where info_id =
+        #{infoId}
+    </select>
+
+<!--    OrderPublishedInfo getOrderPublishedInfoWithOutDetails(int infoId);-->
+    <select id="getOrderPublishedInfoWithOutDetails" resultMap="BaseOrderPublishedMap">
+        select <include refid="Secret_OrderPublished_Column_List"></include> from order_published_info where info_id =
+        #{infoId}
+    </select>
+
+
+
+    <!--    int discussOrder(int infoId,int comment);-->
+    <update id="discussOrder">
+    update   order_receipted_info set receipt_user_comment = #{comment} where  receipt_id =#{infoId}
+</update>
+    <!--    int finishOrder(int infoId);-->
+    <update id="finishOrder">
+            update   order_receipted_info set receipt_user_finished = 1 where  receipt_id =#{infoId}
+    </update>
+
+
+
+    <update id="discussOrder_1">
+    update   order_receipted_info set receipted_user_comment =#{comment} where  receipt_id =#{infoId}
+</update>
+    <!--    int finishOrder(int infoId);-->
+    <update id="finishOrder_1">
+            update   order_receipted_info set receipted_user_finished =1  where  receipt_id =#{infoId}
+    </update>
+
+
+<!--    boolean getOrder(int infoId);-->
+    <update id=""></update>
+
+</mapper>

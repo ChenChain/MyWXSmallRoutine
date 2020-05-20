@@ -19,7 +19,6 @@ import java.util.Map;
  */
 @Api(tags = "处理用户逻辑的路由")
 @RestController
-@Controller
 public class UserController {
 
     @Autowired

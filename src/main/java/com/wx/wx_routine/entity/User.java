@@ -1,5 +1,7 @@
 package com.wx.wx_routine.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +12,7 @@ import lombok.NoArgsConstructor;
  * @author chain
  * @date 2020/4/27
  */
+@ApiModel(description = "用户实体")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,6 +21,7 @@ public class User {
     /**
      * 主键
      */
+    @ApiModelProperty(value = "用户ID",example = "123")
     private Integer user_id;
 
     /**

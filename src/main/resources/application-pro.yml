@@ -1,4 +1,9 @@
 server:
+  ssl:
+    key-store: classpath:myssl.jks
+    key-store-type: JKS
+    key-alias: alias
+    key-store-password: 4C7uC4Mm
   port: 443
 
 
@@ -16,7 +21,7 @@ spring:
 
 
 #本地图片保存路径
-imgPath: C:/Users/17596/Desktop/wx_imgs/
+imgPath: /web/wx_routine/wx_imgs/
 
 #本地图片显示的url
-imgPathUrl: http://localhost:8080/wx_imgs/
+imgPathUrl: http://47.98.135.4:8082/wx_imgs/

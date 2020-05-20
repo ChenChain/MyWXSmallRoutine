@@ -10,9 +10,11 @@ imgPathUrl: http://localhost:8080/wx_imgs/
 spring:
   datasource:
     username: root
-    password: 123456
+    password: cc123456
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost/qsbAndroid?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&autoReconnect=true&allowMultiQueries=true
+#    url: jdbc:mysql://localhost/qsbAndroid?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&autoReconnect=true&allowMultiQueries=true
+    url: jdbc:mysql://47.98.135.4/wx_database?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&autoReconnect=true&allowMultiQueries=true
+
   servlet:
     multipart:
       max-file-size: 10MB
