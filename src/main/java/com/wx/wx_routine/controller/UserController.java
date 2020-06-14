@@ -57,11 +57,11 @@ public class UserController {
     **/
     @ApiOperation(value = "用户更新信息",notes = "仅传递需要更新的字段即可，以user的JSON形式")
     @PostMapping("/api/user/update/")
-    public User updateUserInfo(@RequestBody JSONObject  user){
-        JSONObject jsonObject=user.getJSONObject("user");
-        //更新后的user
-        User u= (User) JSONObject.parseObject(jsonObject.toJSONString(),User.class);
-        return  userService.updateUserByOpenId(u);
+    public User updateUserInfo(@RequestBody User  user){
+//        JSONObject jsonObject=user.getJSONObject("user");
+//        //更新后的user
+//        User u= (User) JSONObject.parseObject(jsonObject.toJSONString(),User.class);
+        return  userService.updateUserByOpenId(user);
     }
 
 
